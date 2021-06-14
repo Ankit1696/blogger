@@ -1,18 +1,53 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {RegisterComponent} from './auth/register/register.component';
+import {LoginComponent} from './auth/login/login.component';
+import {RegisterSuccessComponent} from './auth/register-success/register-success.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {Ng2Webstorage} from "ngx-webstorage";
+import { HomeComponent } from './home/home.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import {EditorModule} from "@tinymce/tinymce-angular";
+import {HttpClientIntercepter} from "./http-client-intercepter";
+import { PostComponent } from './post/post.component';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    RegisterComponent,
+    LoginComponent,
+    RegisterSuccessComponent,
+    HomeComponent,
+    AddPostComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot([
+      {path:'register', component:RegisterComponent},
+      {path:'posts/id', component:PostComponent},
+      {path:'register-success', component:RegisterSuccessComponent},
+      {path:'login', component:LoginComponent},
+      {path:'home', component:HomeComponent},
+      {path:'add-post', component:AddPostComponent},
+      {path:'', component:HomeComponent},
+    ]),
+    HttpClientModule,
+    Ng2Webstorage.forRoot(),
+    EditorModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass:HttpClientIntercepter, multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

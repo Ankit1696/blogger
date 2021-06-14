@@ -1,0 +1,22 @@
+.header{
+  padding: 1px 10px;
+  background: #1976d2;
+}
+
+.title{
+  color: antiquewhite;
+  text-decoration: none;
+
+}
+
+.register, .login{
+  float: right;
+  text-decoration: none;
+  color: antiquewhite;
+  padding-top: 10px;
+}
+.new-post{
+  float: right;
+  color: antiquewhite;
+  padding: 10px;
+}
